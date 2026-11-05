@@ -76,7 +76,7 @@ class WP_Widget_Login_Logout extends WP_Widget {
 			if ( is_user_logged_in() ){
 				$current_user = wp_get_current_user();
 				$username = $current_user->display_name;
-				$username_link = apply_filters( 'login_logout_username_link', '<a href="'.admin_url('profile.php').'">'.$username.'</a>', $current_user );
+				$username_link = apply_filters( 'login_logout_username_link', '<a href="'.admin_url('profile.php').'">'.esc_html($username).'</a>', $current_user );
 				$welcome_text_new = str_replace('[username]', $username_link, $welcome_text);
 				echo $item_before.'"item_welcome">'.$welcome_text_new.$item_after.$split_char;
 			}
@@ -128,19 +128,19 @@ class WP_Widget_Login_Logout extends WP_Widget {
 			self::get_defaults()
 		);
 		$instance['title'] = strip_tags($new_instance['title']);
-		$instance['login_text'] = trim($new_instance['login_text']);
-		$instance['logout_text'] = trim($new_instance['logout_text']);
+		$instance['login_text'] = self::sanitize_html($new_instance['login_text']);
+		$instance['logout_text'] = self::sanitize_html($new_instance['logout_text']);
 		$instance['show_welcome_text'] = $new_instance['show_welcome_text'] ? 1 : 0;
-		$instance['welcome_text'] = trim($new_instance['welcome_text']);
+		$instance['welcome_text'] = self::sanitize_html($new_instance['welcome_text']);
 		$instance['register_link'] = $new_instance['register_link'] ? 1 : 0;
-		$instance['register_text'] = trim($new_instance['register_text']);
+		$instance['register_text'] = self::sanitize_html($new_instance['register_text']);
 		$instance['admin_link'] = $new_instance['admin_link'] ? 1 : 0;
-		$instance['admin_text'] = trim($new_instance['admin_text']);
+		$instance['admin_text'] = self::sanitize_html($new_instance['admin_text']);
 		$instance['login_redirect_to'] = strip_tags($new_instance['login_redirect_to']);
 		$instance['logout_redirect_to'] = strip_tags($new_instance['logout_redirect_to']);
 		$instance['inline'] = $new_instance['inline'] ? 1 : 0;
-		$instance['login_extra'] = trim($new_instance['login_extra']);
-		$instance['logout_extra'] = trim($new_instance['logout_extra']);
+		$instance['login_extra'] = self::sanitize_html($new_instance['login_extra']);
+		$instance['logout_extra'] = self::sanitize_html($new_instance['logout_extra']);
 		return $instance;
 	}
 
@@ -226,6 +226,16 @@ class WP_Widget_Login_Logout extends WP_Widget {
 	}
 	
 	
+	// Same rule as the core Text widget: raw HTML only for users with unfiltered_html
+	private static function sanitize_html( $html ) {
+		$html = trim($html);
+		if ( current_user_can('unfiltered_html') ) {
+			return $html;
+		}
+		return wp_kses_post($html);
+	}
+
+
 	private static function get_defaults() {
 		$defaults = array(
 			'title' => '',
