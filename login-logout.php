@@ -1,15 +1,18 @@
 <?php
 /*
-Plugin Name: Login-Logout
+Plugin Name: Login-Logout (HackIndex Patched)
 Plugin URI: http://wordpress.org/plugins/login-logout/
-Description: Show login or logout link. Show register or site-admin link. The replacement for the default Meta widget.
-Version: 3.8
+Description: Show login or logout link. Show register or site-admin link. The replacement for the default Meta widget. (HackIndex Patched)
+Version: 3.8.1
 Author: webvitaly
 Author URI: http://web-profile.net/wordpress/plugins/
 License: GPLv3
+License URI: http://www.gnu.org/licenses/gpl.html
+
+Modified by HackIndex on 2026-11-05: security fixes. Fork of https://github.com/webvitalii/login-logout
 */
 
-define('LOGIN_LOGOUT_PLUGIN_VERSION', '3.8');
+define('LOGIN_LOGOUT_PLUGIN_VERSION', '3.8.1');
 
 class WP_Widget_Login_Logout extends WP_Widget {
 

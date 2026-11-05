@@ -1,16 +1,26 @@
-=== Login-Logout ===
-Contributors: webvitaly
+=== Login-Logout (HackIndex Patched) ===
+Contributors: webvitaly, joshuavanderpoll
 Donate link: http://web-profile.net/donate/
 Tags: login, logout, widget, meta, sidebar, admin, register
 Requires at least: 4.0
-Tested up to: 5.5
-Stable tag: 3.8
+Tested up to: 7.1
+Stable tag: 3.8.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
-Widget with login, logout, admin and register links. Replacement of the default Meta widget.
+Widget with login, logout, admin and register links. Replacement of the default Meta widget. (HackIndex Patched)
 
 == Description ==
+
+= HackIndex Patched fork =
+This is an unofficial fork of Login-Logout by webvitaly. The original plugin is no longer maintained and its latest release (3.8) has a [known vulnerability](https://www.wordfence.com/threat-intel/vulnerabilities/id/00bb89b7-e8f3-4ffc-8086-34f70a66e641). HackIndex maintains this fork for security fixes only.
+
+* We fix security issues and keep the plugin working on current WordPress and PHP versions. We do not add features or change how the plugin works.
+* It is a drop-in replacement: same plugin folder and widget settings, so your Login-Logout widgets keep working.
+* HackIndex is not affiliated with or endorsed by webvitaly. Please do not contact the original author for support with this fork, open an issue on the fork instead.
+* Original plugin: [WordPress.org](https://wordpress.org/plugins/login-logout/) and [GitHub](https://github.com/webvitalii/login-logout) by webvitaly.
+* HackIndex fork and issues: [github.com/HackIndex-io/login-logout](https://github.com/HackIndex-io/login-logout)
+* Licensed under the GPLv3, like the original, and provided without any warranty.
 
 * **[Advanced iFrame Pro](https://1.envato.market/KdRNz "Advanced iFrame Pro")**
 * **[Login-Logout](http://web-profile.net/wordpress/plugins/login-logout/ "Plugin page")**
@@ -37,6 +47,11 @@ Widget with login, logout, admin and register links. Replacement of the default 
 4. Widget output when user is logged in and inline option is on
 
 == Changelog ==
+
+= 3.8.1 =
+* Security: fixed Administrator+ stored Cross-Site Scripting ([CVE-2025-53467](https://www.cve.org/CVERecord?id=CVE-2025-53467), [Wordfence advisory](https://www.wordfence.com/threat-intel/vulnerabilities/id/00bb89b7-e8f3-4ffc-8086-34f70a66e641)) in the widget texts and extra items. Users without the unfiltered_html capability (multisite site admins, or when DISALLOW_UNFILTERED_HTML is set) can now only save the HTML allowed in posts, like in the core Text widget.
+* Security: escaped the display name in the welcome text
+* Tested with WordPress 7.1 and PHP 8.0 to 8.5
 
 = 3.8 =
 * Fixed the PHP 7.2 Deprecated Notice on create_function. Thanks to joneiseman - https://wordpress.org/support/users/joneiseman/
